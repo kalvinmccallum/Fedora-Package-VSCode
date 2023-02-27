@@ -8,7 +8,7 @@ Create a spec file: Create a spec file for the Visual Studio Code RPM package. T
 
 The spec file has been provided as: vscode.spec
 
-Build the RPM package: Once the spec file has been created, you can use the rpmbuild command to build the RPM package: rpmbuild -bb vscode.spec
+Build the RPM package: Once the spec file has been created, you can use the rpmbuild command to build the RPM package: rpmbuild -ba vscode.spec
 
 Install the RPM package: Once the RPM package has been created, you can install it using the dnf command:sudo dnf install RPMS/x86_64/vscode-1.63.2-1.fc34.x86_64.rpm
 
