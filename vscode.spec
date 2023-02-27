@@ -1,17 +1,27 @@
-Name: vscode
-Version: 1.63.2
-Release: 1%{?dist}
-Summary: Code editing redefined
-License: MIT
-URL: https://code.visualstudio.com/
-Source0: https://update.code.visualstudio.com/latest/linux-x64/stable
-BuildArch: x86_64
+Name:           vscode
+Version:        1.63.2
+Release:        1%{?dist}
+Summary:        Visual Studio Code
 
-BuildRequires: nodejs
-Requires: nodejs
+Group:          Applications/Editors
+License:        MIT
+URL:            https://code.visualstudio.com/
+
+Source0:        https://update.code.visualstudio.com/latest/linux-x64/stable
+BuildRequires:  libX11-devel
+BuildRequires:  libxkbfile-devel
+BuildRequires:  glibc-devel
+BuildRequires:  libstdc++-devel
+BuildRequires:  expat-devel
+BuildRequires:  desktop-file-utils
+Requires:       libX11
+Requires:       libxkbfile
+Requires:       glibc
+Requires:       libstdc++
+Requires:       expat
 
 %description
-Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux.
+Visual Studio Code is a code editor.
 
 %prep
 %setup -q
@@ -19,12 +29,29 @@ Visual Studio Code is a lightweight but powerful source code editor which runs o
 %build
 
 %install
-mkdir -p %{buildroot}/usr/share/vscode/
-tar xzf stable -C %{buildroot}/usr/share/vscode/
+install -d -m 755 %{buildroot}%{_bindir}
+install -p -m 755 "code" %{buildroot}%{_bindir}/code
+
+install -d -m 755 %{buildroot}%{_datadir}/applications
+desktop-file-install \
+    --dir=%{buildroot}%{_datadir}/applications \
+    --mode=644 \
+    --add-category=X-Red-Hat-Base \
+    --add-category=X-Red-Hat-Dev \
+    --add-category=X-Red-Hat-Tools \
+    --add-category=Development \
+    --add-category=IDE \
+    --add-category=TextEditor \
+    --add-category=Utility \
+    --add-category=GTK \
+    --add-category=GNOME \
+    --add-category=Qt \
+    "resources/linux/code.desktop"
 
 %files
-/usr/share/vscode/
+%{_bindir}/code
+%{_datadir}/applications/code.desktop
 
 %changelog
-* Tue Feb 16 2023 Kalvin McCallum <kalvin_mccallum@student.uml.edu> - 1.63.2-1
+* Mon Feb 27 2023 Kalvin McCallum <kalvin_mccallum@student.uml.edu> - 1.63.2-1
 - Initial build
