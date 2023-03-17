@@ -10,9 +10,7 @@ Install the RPM package using the dnf command:
 <sudo dnf install ./vscode.rpm>
 This will install the VS Code application along with all the necessary dependencies.
 
-Once the installation is complete, launch VS Code by searching for it in the application menu or by running the following command in the terminal:
-<code>
-
+Once the installation is complete, launch VS Code by searching for it in the application menu.
 This will launch the VS Code editor on your Fedora machine.
   
 That's it! You have successfully installed VS Code on your Fedora machine using the RPM package.
